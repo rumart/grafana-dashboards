@@ -14,7 +14,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "5.0.4"
+      "version": "5.1.3"
     },
     {
       "type": "panel",
@@ -52,7 +52,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1523560416647,
+  "iteration": 1536387620340,
   "links": [],
   "panels": [
     {
@@ -236,7 +236,7 @@
             {
               "key": "value",
               "operator": "<",
-              "value": "100"
+              "value": "101"
             },
             {
               "condition": "AND",
@@ -735,6 +735,12 @@
               "key": "resource",
               "operator": "=",
               "value": "aggregation-cpu-sum"
+            },
+            {
+              "condition": "AND",
+              "key": "value",
+              "operator": "<",
+              "value": "101"
             }
           ]
         },
@@ -766,6 +772,12 @@
               "key": "resource",
               "operator": "=",
               "value": "aggregation-cpu-sum"
+            },
+            {
+              "condition": "AND",
+              "key": "value",
+              "operator": "<",
+              "value": "101"
             }
           ]
         },
@@ -797,6 +809,12 @@
               "key": "resource",
               "operator": "=",
               "value": "aggregation-cpu-sum"
+            },
+            {
+              "condition": "AND",
+              "key": "value",
+              "operator": "<",
+              "value": "101"
             }
           ]
         }
@@ -835,7 +853,11 @@
           "min": null,
           "show": true
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "cacheTimeout": null,
@@ -1089,7 +1111,11 @@
           "min": null,
           "show": true
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "cacheTimeout": null,
@@ -1337,7 +1363,11 @@
           "min": null,
           "show": true
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "aliasColors": {},
@@ -1461,7 +1491,11 @@
           "min": null,
           "show": true
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "aliasColors": {},
@@ -1598,7 +1632,11 @@
           "min": null,
           "show": true
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "aliasColors": {},
@@ -1871,7 +1909,11 @@
           "min": null,
           "show": true
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "aliasColors": {},
@@ -2050,7 +2092,11 @@
           "min": null,
           "show": true
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "aliasColors": {},
@@ -2100,6 +2146,8 @@
           "measurement": "temperature",
           "orderByTime": "ASC",
           "policy": "default",
+          "query": "SELECT ((\"value\" -2731.5)/10) FROM \"temperature\" WHERE (\"host\" =~ /^$host$/) AND $timeFilter GROUP BY \"resource\"",
+          "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -2162,7 +2210,11 @@
           "min": null,
           "show": true
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "aliasColors": {},
@@ -2299,7 +2351,11 @@
           "min": null,
           "show": true
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "alert": {
@@ -2396,7 +2452,7 @@
             {
               "key": "host",
               "operator": "=",
-              "value": "freenas_hostname"
+              "value": "freenas_rhmlab_net"
             },
             {
               "condition": "AND",
@@ -2511,7 +2567,11 @@
           "min": null,
           "show": true
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     }
   ],
   "refresh": "30s",
@@ -2574,5 +2634,5 @@
   "timezone": "",
   "title": "Freenas",
   "uid": "PcP5Wbmiz",
-  "version": 26
+  "version": 29
 }
