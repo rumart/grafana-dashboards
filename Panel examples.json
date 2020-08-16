@@ -82,7 +82,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1597380997407,
+  "iteration": 1597562896310,
   "links": [],
   "panels": [
     {
@@ -3054,6 +3054,151 @@
       ],
       "title": "Custom panels",
       "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": "${DS_TELEGRAF-VSPHERE}",
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 12
+      },
+      "id": 54,
+      "panels": [
+        {
+          "datasource": "${DS_TELEGRAF-VSPHERE}",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {},
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "vsphere_host_cpu.count"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "Hosts"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "vsphere_vm_cpu.count"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "VMs"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 10,
+            "x": 0,
+            "y": 13
+          },
+          "id": 52,
+          "interval": "$time",
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            }
+          },
+          "pluginVersion": "7.0.5",
+          "targets": [
+            {
+              "groupBy": [],
+              "measurement": "vsphere_host_cpu",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "query": "SELECT count(distinct(\"esxhostname\")) FROM (SELECT \"usage_average\", \"esxhostname\" FROM \"vsphere_host_cpu\" WHERE (\"clustername\" = 'vsan-01') AND $timeFilter)",
+              "rawQuery": true,
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "usage_average"
+                    ],
+                    "type": "field"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "clustername",
+                  "operator": "=",
+                  "value": "vsan-01"
+                }
+              ]
+            },
+            {
+              "groupBy": [],
+              "measurement": "vsphere_host_cpu",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "query": "SELECT count(distinct(\"vmname\")) FROM (SELECT \"usage_average\", \"vmname\" FROM \"vsphere_vm_cpu\" WHERE (\"clustername\" = 'vsan-01') AND $timeFilter)",
+              "rawQuery": true,
+              "refId": "B",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "usage_average"
+                    ],
+                    "type": "field"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "clustername",
+                  "operator": "=",
+                  "value": "vsan-01"
+                }
+              ]
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "",
+          "type": "stat"
+        }
+      ],
+      "title": "Manual queries",
+      "type": "row"
     }
   ],
   "refresh": "30s",
@@ -3178,5 +3323,5 @@
   "timezone": "",
   "title": "Panel examples",
   "uid": "GpVTsYGGk",
-  "version": 13
+  "version": 14
 }
