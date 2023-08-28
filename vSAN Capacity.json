@@ -52,7 +52,7 @@
       }
     ]
   },
-  "description": "Dashboard with vSAN performance data pulled from vCenter with Telegraf. The dashboard includes graphs with the same metrics as the built-in vSAN performance charts in vCenter ",
+  "description": "Dashboard with vSAN capacity data pulled from vCenter with Telegraf",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
@@ -1775,6 +1775,6 @@
   "timezone": "",
   "title": "vSAN Capacity",
   "uid": "ca956961-d3f6-491a-b845-b9dae3814231",
-  "version": 8,
+  "version": 9,
   "weekStart": ""
 }
