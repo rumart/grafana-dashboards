@@ -15,3 +15,9 @@ Example dashboard used in a blog series on vSphere Performance data with Telegra
 A dashboard for monitoring VMware vSAN performance. The dashboard resembles the built-in vSAN performance dashboard in vCenter which is split in VM (frontend) and Backend metrics.
 
 The data is pulled with Telegraf 1.27.
+
+### [vSAN Capacity.json](vSAN%20Capacity.json)
+
+A dashboard for monitoring VMware vSAN Capacity.
+
+The data is pulled with Telegraf 1.27.
