@@ -1,0 +1,1333 @@
+{
+  "__inputs": [
+    {
+      "name": "DS_INFLUXDB-PROXMOX",
+      "label": "InfluxDB-proxmox",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "influxdb",
+      "pluginName": "InfluxDB"
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "10.0.3"
+    },
+    {
+      "type": "datasource",
+      "id": "influxdb",
+      "name": "InfluxDB",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "stat",
+      "name": "Stat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": true,
+      "keepTime": true,
+      "tags": [
+        "pve"
+      ],
+      "targetBlank": true,
+      "title": "",
+      "tooltip": "",
+      "type": "dashboards",
+      "url": ""
+    }
+  ],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 8,
+      "panels": [],
+      "title": "$vms",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB-PROXMOX}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "running": {
+                  "color": "green",
+                  "index": 0
+                },
+                "stopped": {
+                  "color": "red",
+                  "index": 1
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 0,
+        "y": 1
+      },
+      "id": 17,
+      "options": {
+        "colorMode": "background_solid",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^system\\.status$/",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.0.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB-PROXMOX}"
+          },
+          "groupBy": [],
+          "measurement": "system",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "query": "SELECT (\"status\")  FROM \"autogen\".\"system\" WHERE (\"host\"::tag =~ /^$vms$/) AND $timeFilter",
+          "rawQuery": false,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "status"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "host::tag",
+              "operator": "=~",
+              "value": "/^$vms$/"
+            }
+          ]
+        }
+      ],
+      "title": "Status",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB-PROXMOX}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 40
+              },
+              {
+                "color": "red",
+                "value": 60
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 4,
+        "y": 1
+      },
+      "id": 14,
+      "options": {
+        "colorMode": "background_solid",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.0.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB-PROXMOX}"
+          },
+          "groupBy": [],
+          "measurement": "system",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "cpu"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "host::tag",
+              "operator": "=~",
+              "value": "/^$vms$/"
+            }
+          ]
+        }
+      ],
+      "title": "CPU Utilization",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB-PROXMOX}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 75
+              },
+              {
+                "color": "red",
+                "value": 85
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 7,
+        "y": 1
+      },
+      "id": 15,
+      "options": {
+        "colorMode": "background_solid",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.0.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB-PROXMOX}"
+          },
+          "groupBy": [],
+          "measurement": "system",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "query": "SELECT (\"mem\"*100/\"maxmem\")  FROM \"autogen\".\"system\" WHERE (\"host\"::tag =~ /^$vms$/) AND $timeFilter",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "maxmem"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "host::tag",
+              "operator": "=",
+              "value": "ubuntu-4"
+            }
+          ]
+        }
+      ],
+      "title": "Memory Utilization",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB-PROXMOX}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 10,
+        "y": 1
+      },
+      "id": 12,
+      "options": {
+        "colorMode": "background_solid",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.0.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB-PROXMOX}"
+          },
+          "groupBy": [],
+          "measurement": "system",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "cpus"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "host::tag",
+              "operator": "=~",
+              "value": "/^$vms$/"
+            }
+          ]
+        }
+      ],
+      "title": "CPUs",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB-PROXMOX}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 13,
+        "y": 1
+      },
+      "id": 13,
+      "options": {
+        "colorMode": "background_solid",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.0.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB-PROXMOX}"
+          },
+          "groupBy": [],
+          "measurement": "system",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "maxmem"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "host::tag",
+              "operator": "=~",
+              "value": "/^$vms$/"
+            }
+          ]
+        }
+      ],
+      "title": "RAM",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB-PROXMOX}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 16,
+        "y": 1
+      },
+      "id": 18,
+      "options": {
+        "colorMode": "background_solid",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^system\\.uptime$/",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.0.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB-PROXMOX}"
+          },
+          "groupBy": [],
+          "measurement": "system",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "query": "SELECT (\"status\")  FROM \"autogen\".\"system\" WHERE (\"host\"::tag =~ /^$vms$/) AND $timeFilter",
+          "rawQuery": false,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "uptime"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "host::tag",
+              "operator": "=~",
+              "value": "/^$vms$/"
+            }
+          ]
+        }
+      ],
+      "title": "Uptime",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB-PROXMOX}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 20,
+        "y": 1
+      },
+      "id": 19,
+      "options": {
+        "colorMode": "background_solid",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^system\\.running\\-qemu$/",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.0.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB-PROXMOX}"
+          },
+          "groupBy": [],
+          "measurement": "system",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "query": "SELECT \"name\"  FROM \"autogen\".\"system\" WHERE (\"host\"::tag =~ /^$vms$/) AND $timeFilter",
+          "rawQuery": false,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "running-qemu"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "host::tag",
+              "operator": "=",
+              "value": "ubuntu-4"
+            }
+          ]
+        }
+      ],
+      "title": "qemu version",
+      "type": "stat"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 6
+      },
+      "id": 5,
+      "panels": [],
+      "title": "Utilization",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB-PROXMOX}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 7
+      },
+      "id": 1,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "mean",
+            "max"
+          ],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "alias": "$col",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB-PROXMOX}"
+          },
+          "groupBy": [],
+          "measurement": "system",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "query": "SELECT \"cpu\" FROM \"autogen\".\"system\" WHERE (\"host\"::tag =~ /^$vms$/) AND $timeFilter GROUP BY \"host\"",
+          "rawQuery": false,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "cpu"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "host::tag",
+              "operator": "=~",
+              "value": "/^$vms$/"
+            }
+          ]
+        }
+      ],
+      "title": "CPU Utilization",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB-PROXMOX}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 7
+      },
+      "id": 2,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "mean",
+            "max"
+          ],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "alias": "$col",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB-PROXMOX}"
+          },
+          "groupBy": [],
+          "measurement": "system",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "query": "SELECT (\"mem\"*100/\"maxmem\") as mem FROM \"autogen\".\"system\" WHERE (\"host\"::tag =~ /^$vms$/) AND $timeFilter",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "cpu"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "host::tag",
+              "operator": "=~",
+              "value": "/^$vms$/"
+            }
+          ]
+        }
+      ],
+      "title": "Memory Utilization",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB-PROXMOX}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "binBps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 16
+      },
+      "id": 6,
+      "interval": "60s",
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "mean",
+            "max"
+          ],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "alias": "$col",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB-PROXMOX}"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            }
+          ],
+          "measurement": "system",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "query": "SELECT derivative(last(\"netin\"), 1s) FROM \"autogen\".\"system\" WHERE (\"host\"::tag =~ /^$vms$/) AND $timeFilter GROUP BY \"host\",time($__interval)",
+          "rawQuery": false,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "netin"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              },
+              {
+                "params": [
+                  "1s"
+                ],
+                "type": "derivative"
+              },
+              {
+                "params": [
+                  "netin"
+                ],
+                "type": "alias"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "netout"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              },
+              {
+                "params": [
+                  "1s"
+                ],
+                "type": "derivative"
+              },
+              {
+                "params": [
+                  "netout"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "host::tag",
+              "operator": "=~",
+              "value": "/^$vms$/"
+            }
+          ]
+        }
+      ],
+      "title": "Network",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB-PROXMOX}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "iops"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 16
+      },
+      "id": 9,
+      "interval": "60s",
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "mean",
+            "max"
+          ],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "alias": "$col",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB-PROXMOX}"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            }
+          ],
+          "measurement": "system",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "query": "SELECT derivative(last(\"diskwrite\"), 1s) FROM \"autogen\".\"system\" WHERE (\"host\"::tag =~ /^$vms$/) AND $timeFilter GROUP BY \"host\",time($__interval)",
+          "rawQuery": false,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "diskread"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              },
+              {
+                "params": [
+                  "1s"
+                ],
+                "type": "derivative"
+              },
+              {
+                "params": [
+                  "diskread"
+                ],
+                "type": "alias"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "diskwrite"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              },
+              {
+                "params": [
+                  "1s"
+                ],
+                "type": "derivative"
+              },
+              {
+                "params": [
+                  "diskwrite"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "host::tag",
+              "operator": "=~",
+              "value": "/^$vms$/"
+            }
+          ]
+        }
+      ],
+      "title": "Disk",
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "30s",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [
+    "pve"
+  ],
+  "templating": {
+    "list": [
+      {
+        "current": {},
+        "datasource": {
+          "type": "influxdb",
+          "uid": "${DS_INFLUXDB-PROXMOX}"
+        },
+        "definition": "show tag values with key = \"nodename\"",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Hosts",
+        "multi": true,
+        "name": "hosts",
+        "options": [],
+        "query": "show tag values with key = \"nodename\"",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "influxdb",
+          "uid": "${DS_INFLUXDB-PROXMOX}"
+        },
+        "definition": "show tag values from system with key = \"host\" where vmid =~ /\\d+?/ and nodename =~ /$hosts/",
+        "hide": 0,
+        "includeAll": false,
+        "label": "VMs",
+        "multi": false,
+        "name": "vms",
+        "options": [],
+        "query": "show tag values from system with key = \"host\" where vmid =~ /\\d+?/ and nodename =~ /$hosts/",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Proxmox VM",
+  "uid": "de232056-1ce4-421d-a11f-0ff62ed1d577",
+  "version": 18,
+  "weekStart": ""
+}
