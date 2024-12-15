@@ -173,7 +173,7 @@
               },
               {
                 "params": [],
-                "type": "sum"
+                "type": "mean"
               }
             ]
           ],
@@ -984,8 +984,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -993,7 +992,7 @@
               }
             ]
           },
-          "unit": "bytes"
+          "unit": "binBps"
         },
         "overrides": []
       },
@@ -1063,15 +1062,9 @@
               },
               {
                 "params": [
-                  "10s"
+                  "1s"
                 ],
-                "type": "derivative"
-              },
-              {
-                "params": [
-                  " / 10"
-                ],
-                "type": "math"
+                "type": "non_negative_derivative"
               },
               {
                 "params": [
@@ -1093,15 +1086,9 @@
               },
               {
                 "params": [
-                  "10s"
+                  "1s"
                 ],
-                "type": "derivative"
-              },
-              {
-                "params": [
-                  " / 10"
-                ],
-                "type": "math"
+                "type": "non_negative_derivative"
               },
               {
                 "params": [
@@ -1168,8 +1155,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1177,7 +1163,7 @@
               }
             ]
           },
-          "unit": "mbytes"
+          "unit": "binBps"
         },
         "overrides": []
       },
@@ -1188,7 +1174,6 @@
         "y": 24
       },
       "id": 87,
-      "interval": "10s",
       "options": {
         "legend": {
           "calcs": [
@@ -1214,7 +1199,7 @@
           "groupBy": [
             {
               "params": [
-                "1m"
+                "$__interval"
               ],
               "type": "time"
             },
@@ -1247,15 +1232,9 @@
               },
               {
                 "params": [
-                  "10s"
+                  "1s"
                 ],
-                "type": "derivative"
-              },
-              {
-                "params": [
-                  " / 10"
-                ],
-                "type": "math"
+                "type": "non_negative_derivative"
               },
               {
                 "params": [
@@ -1277,15 +1256,9 @@
               },
               {
                 "params": [
-                  "10s"
+                  "1s"
                 ],
-                "type": "derivative"
-              },
-              {
-                "params": [
-                  " / 10"
-                ],
-                "type": "math"
+                "type": "non_negative_derivative"
               },
               {
                 "params": [
@@ -1365,8 +1338,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1479,8 +1451,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1593,8 +1564,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1602,7 +1572,7 @@
               }
             ]
           },
-          "unit": "iops"
+          "unit": "binBps"
         },
         "overrides": []
       },
@@ -1644,7 +1614,7 @@
           "measurement": "system",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT derivative(last(\"netin\"), 1s) FROM \"autogen\".\"system\" WHERE (\"host\"::tag =~ /^$vms$/) AND $timeFilter GROUP BY \"host\",time($__interval)",
+          "query": "SELECT non_negative_derivative(last(\"netin\"), 1s) FROM \"autogen\".\"system\" WHERE (\"host\"::tag =~ /^$vms$/) AND $timeFilter GROUP BY \"host\",time($__interval)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1725,8 +1695,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1734,7 +1703,7 @@
               }
             ]
           },
-          "unit": "iops"
+          "unit": "binBps"
         },
         "overrides": []
       },
@@ -1776,7 +1745,7 @@
           "measurement": "system",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT derivative(last(\"netout\"), 1s) FROM \"autogen\".\"system\" WHERE (\"host\"::tag =~ /^$vms$/) AND $timeFilter GROUP BY \"host\",time($__interval)",
+          "query": "SELECT non_negative_derivative(last(\"netout\"), 1s) FROM \"autogen\".\"system\" WHERE (\"host\"::tag =~ /^$vms$/) AND $timeFilter GROUP BY \"host\",time($__interval)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1857,8 +1826,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1866,7 +1834,7 @@
               }
             ]
           },
-          "unit": "iops"
+          "unit": "binBps"
         },
         "overrides": []
       },
@@ -1908,7 +1876,7 @@
           "measurement": "system",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT derivative(last(\"diskread\"), 1s) FROM \"autogen\".\"system\" WHERE (\"host\"::tag =~ /^$vms$/) AND $timeFilter GROUP BY \"host\",time($__interval)",
+          "query": "SELECT non_negative_derivative(last(\"diskread\"), 1s) FROM \"autogen\".\"system\" WHERE (\"host\"::tag =~ /^$vms$/) AND $timeFilter GROUP BY \"host\",time($__interval)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1989,8 +1957,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1998,7 +1965,7 @@
               }
             ]
           },
-          "unit": "iops"
+          "unit": "binBps"
         },
         "overrides": []
       },
@@ -2040,7 +2007,7 @@
           "measurement": "system",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT derivative(last(\"diskwrite\"), 1s) FROM \"autogen\".\"system\" WHERE (\"host\"::tag =~ /^$vms$/) AND $timeFilter GROUP BY \"host\",time($__interval)",
+          "query": "SELECT non_negative_derivative(last(\"diskwrite\"), 1s) FROM \"autogen\".\"system\" WHERE (\"host\"::tag =~ /^$vms$/) AND $timeFilter GROUP BY \"host\",time($__interval)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -2135,6 +2102,6 @@
   "timezone": "",
   "title": "Proxmox Overview",
   "uid": "d0716ceb-4fe7-4488-82a5-f35f368e873e",
-  "version": 50,
+  "version": 52,
   "weekStart": ""
 }

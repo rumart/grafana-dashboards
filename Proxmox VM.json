@@ -683,8 +683,8 @@
           "tags": [
             {
               "key": "host::tag",
-              "operator": "=",
-              "value": "ubuntu-4"
+              "operator": "=~",
+              "value": "/^$vms$/"
             }
           ]
         }
@@ -1055,13 +1055,13 @@
               },
               {
                 "params": [],
-                "type": "last"
+                "type": "mean"
               },
               {
                 "params": [
                   "1s"
                 ],
-                "type": "derivative"
+                "type": "non_negative_derivative"
               },
               {
                 "params": [
@@ -1079,13 +1079,13 @@
               },
               {
                 "params": [],
-                "type": "last"
+                "type": "mean"
               },
               {
                 "params": [
                   "1s"
                 ],
-                "type": "derivative"
+                "type": "non_negative_derivative"
               },
               {
                 "params": [
@@ -1157,7 +1157,7 @@
               }
             ]
           },
-          "unit": "iops"
+          "unit": "binBps"
         },
         "overrides": []
       },
@@ -1217,13 +1217,13 @@
               },
               {
                 "params": [],
-                "type": "last"
+                "type": "mean"
               },
               {
                 "params": [
                   "1s"
                 ],
-                "type": "derivative"
+                "type": "non_negative_derivative"
               },
               {
                 "params": [
@@ -1241,13 +1241,13 @@
               },
               {
                 "params": [],
-                "type": "last"
+                "type": "mean"
               },
               {
                 "params": [
                   "1s"
                 ],
-                "type": "derivative"
+                "type": "non_negative_derivative"
               },
               {
                 "params": [
@@ -1328,6 +1328,6 @@
   "timezone": "",
   "title": "Proxmox VM",
   "uid": "de232056-1ce4-421d-a11f-0ff62ed1d577",
-  "version": 18,
+  "version": 20,
   "weekStart": ""
 }

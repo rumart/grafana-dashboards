@@ -932,8 +932,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -941,7 +940,7 @@
               }
             ]
           },
-          "unit": "bytes"
+          "unit": "binBps"
         },
         "overrides": []
       },
@@ -978,7 +977,7 @@
           "groupBy": [
             {
               "params": [
-                "1m"
+                "$__interval"
               ],
               "type": "time"
             },
@@ -1011,15 +1010,9 @@
               },
               {
                 "params": [
-                  "10s"
+                  "1s"
                 ],
-                "type": "derivative"
-              },
-              {
-                "params": [
-                  " / 10"
-                ],
-                "type": "math"
+                "type": "non_negative_derivative"
               },
               {
                 "params": [
@@ -1041,15 +1034,9 @@
               },
               {
                 "params": [
-                  "10s"
+                  "1s"
                 ],
-                "type": "derivative"
-              },
-              {
-                "params": [
-                  " / 10"
-                ],
-                "type": "math"
+                "type": "non_negative_derivative"
               },
               {
                 "params": [
@@ -1116,8 +1103,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1125,7 +1111,7 @@
               }
             ]
           },
-          "unit": "mbytes"
+          "unit": "binBps"
         },
         "overrides": []
       },
@@ -1162,7 +1148,7 @@
           "groupBy": [
             {
               "params": [
-                "1m"
+                "$__interval"
               ],
               "type": "time"
             },
@@ -1195,15 +1181,9 @@
               },
               {
                 "params": [
-                  "10s"
+                  "1s"
                 ],
-                "type": "derivative"
-              },
-              {
-                "params": [
-                  " / 10"
-                ],
-                "type": "math"
+                "type": "non_negative_derivative"
               },
               {
                 "params": [
@@ -1225,15 +1205,9 @@
               },
               {
                 "params": [
-                  "10s"
+                  "1s"
                 ],
-                "type": "derivative"
-              },
-              {
-                "params": [
-                  " / 10"
-                ],
-                "type": "math"
+                "type": "non_negative_derivative"
               },
               {
                 "params": [
@@ -1294,6 +1268,6 @@
   "timezone": "",
   "title": "Proxmox Hosts",
   "uid": "b5df40bf-979a-458c-a024-331763f6a7ed",
-  "version": 4,
+  "version": 5,
   "weekStart": ""
 }
